@@ -8,8 +8,6 @@ contract StakingRewards is Ownable {
     IERC20 public immutable stakingToken;
     IERC20 public immutable rewardsToken;
 
-    address public owner;
-
     uint256 public duration;
 
     uint256 public finishAt;
@@ -28,8 +26,10 @@ contract StakingRewards is Ownable {
 
     mapping(address => uint256) public balanceOf;
 
-    constructor(address _stakingToken, address _rewardToken) {
-        owner = msg.sender;
+    constructor(
+        address _stakingToken,
+        address _rewardToken
+    ) Ownable(msg.sender) {
         stakingToken = IERC20(_stakingToken);
         rewardsToken = IERC20(_rewardToken);
     }
